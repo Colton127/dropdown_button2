@@ -14,6 +14,7 @@ class DropdownItem<T> extends _DropdownMenuItemContainer {
     super.intrinsicHeight,
     super.alignment,
     this.onTap,
+    this.onLongPress,
     this.value,
     this.enabled = true,
     this.closeOnTap = true,
