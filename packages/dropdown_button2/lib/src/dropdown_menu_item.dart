@@ -23,6 +23,9 @@ class DropdownItem<T> extends _DropdownMenuItemContainer {
   /// Called when the dropdown menu item is tapped.
   final VoidCallback? onTap;
 
+  /// Called when the dropdown menu item is long pressed.
+  final VoidCallback? onLongPress;
+
   /// The value to return if the user selects this menu item.
   ///
   /// Eventually returned in a call to [DropdownButton.onChanged].
@@ -44,6 +47,7 @@ class DropdownItem<T> extends _DropdownMenuItemContainer {
     double? height,
     bool? intrinsicHeight,
     void Function()? onTap,
+    void Function()? onLongPress,
     T? value,
     bool? enabled,
     AlignmentGeometry? alignment,
@@ -53,6 +57,7 @@ class DropdownItem<T> extends _DropdownMenuItemContainer {
       height: height ?? this.height,
       intrinsicHeight: intrinsicHeight ?? this.intrinsicHeight,
       onTap: onTap ?? this.onTap,
+      onLongPress: onLongPress ?? this.onLongPress,
       value: value ?? this.value,
       enabled: enabled ?? this.enabled,
       alignment: alignment ?? this.alignment,
@@ -257,6 +262,7 @@ class _DropdownItemButtonState<T> extends State<_DropdownItemButton<T>> {
         autofocus: isSelectedItem,
         enableFeedback: widget.enableFeedback,
         onTap: _handleOnTap,
+        onLongPress: dropdownItem.onLongPress,
         onFocusChange: _handleFocusChange,
         borderRadius: _menuItemStyle.borderRadius,
         overlayColor: _menuItemStyle.overlayColor,
