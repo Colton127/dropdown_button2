@@ -8,6 +8,7 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
     required this.selectedIndex,
     required this.isNoSelectedItem,
     required this.onChanged,
+    required this.onValueLongPress,
     required this.capturedThemes,
     required this.style,
     required this.barrierDismissible,
@@ -31,6 +32,7 @@ class _DropdownRoute<T> extends PopupRoute<_DropdownRouteResult<T>> {
   final int selectedIndex;
   final bool isNoSelectedItem;
   final ValueChanged<T?>? onChanged;
+  final void Function(T value)? onValueLongPress;
   final CapturedThemes capturedThemes;
   final TextStyle style;
   final FocusNode parentFocusNode;

@@ -6,6 +6,7 @@
 */
 
 import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,11 +14,11 @@ import 'package:flutter/services.dart';
 import 'seperated_sliver_child_builder_delegate.dart';
 
 part 'button_style_data.dart';
-part 'dropdown_style_data.dart';
-part 'dropdown_route.dart';
 part 'dropdown_menu.dart';
 part 'dropdown_menu_item.dart';
 part 'dropdown_menu_separators.dart';
+part 'dropdown_route.dart';
+part 'dropdown_style_data.dart';
 part 'enums.dart';
 part 'utils.dart';
 
@@ -98,6 +99,7 @@ class DropdownButton2<T> extends StatefulWidget {
     this.hint,
     this.disabledHint,
     this.onChanged,
+    this.onValueLongPress,
     this.onMenuStateChange,
     this.style,
     this.underline,
@@ -139,6 +141,7 @@ class DropdownButton2<T> extends StatefulWidget {
     required this.hint,
     required this.disabledHint,
     required this.onChanged,
+    required this.onValueLongPress,
     required this.onMenuStateChange,
     required this.style,
     required this.isDense,
@@ -241,6 +244,9 @@ class DropdownButton2<T> extends StatefulWidget {
   /// non-null, [DropdownButton2.hint] will instead be displayed.
   /// {@endtemplate}
   final ValueChanged<T?>? onChanged;
+
+  /// Called when the user long-presses an item.
+  final void Function(T value)? onValueLongPress;
 
   /// Called when the dropdown menu opens or closes.
   final OnMenuStateChangeFn? onMenuStateChange;
@@ -655,6 +661,7 @@ class _DropdownButton2State<T> extends State<DropdownButton2<T>> with WidgetsBin
       selectedIndex: _selectedIndex ?? 0,
       isNoSelectedItem: _selectedIndex == null,
       onChanged: widget.onChanged,
+      onValueLongPress: widget.onValueLongPress,
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
       style: _textStyle!,
       barrierDismissible: widget.barrierDismissible,
@@ -1015,6 +1022,7 @@ class DropdownButtonFormField2<T> extends FormField<T> {
     Widget? hint,
     Widget? disabledHint,
     this.onChanged,
+    this.onValueLongPress,
     OnMenuStateChangeFn? onMenuStateChange,
     TextStyle? style,
     bool isDense = true,
@@ -1095,6 +1103,7 @@ class DropdownButtonFormField2<T> extends FormField<T> {
                   hint: effectiveHint,
                   disabledHint: effectiveDisabledHint,
                   onChanged: onChanged == null ? null : state.didChange,
+                  onValueLongPress: onValueLongPress,
                   onMenuStateChange: onMenuStateChange,
                   style: style,
                   isDense: isDense,
@@ -1131,6 +1140,9 @@ class DropdownButtonFormField2<T> extends FormField<T> {
 
   /// {@macro flutter.material.dropdownButton.onChanged}
   final ValueChanged<T?>? onChanged;
+
+  /// {@macro flutter.material.dropdownButton.onLongPress}
+  final void Function(T value)? onValueLongPress;
 
   /// The decoration to show around the dropdown button form field.
   ///
